@@ -56,6 +56,7 @@ scaled_features = ['distance_to_solar_noon', 'temperature', 'wind_speed',
 # Apply scaling
 input_data[scaled_features] = scaler_transformer.transform(input_data[scaled_features])
 
+input_data = input_data.drop(['wind_direction','humidity'],axis=1)
 # Predict 
 transformed_prediction = loaded_model.predict(input_data)  # Get transformed target prediction
 
