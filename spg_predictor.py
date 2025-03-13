@@ -61,7 +61,7 @@ input_data = input_data.drop(['wind_direction','humidity'],axis=1)
 transformed_prediction = loaded_model.predict(input_data)  # Get transformed target prediction
 
 # Reverse Yeo-Johnson transformation
-final_prediction = yeo_johnson_transformer.inverse_transform(inverse_scaled_prediction.reshape(-1, 1))
+final_prediction = yj_pg.inverse_transform(inverse_scaled_prediction.reshape(-1, 1))
 
 # Show result
 if st.button("Show Result"):
