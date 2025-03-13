@@ -6,11 +6,8 @@ import pickle
 with open('yj_transformation.pkl', 'rb') as f:
     yeo_johnson_transformer = pickle.load(f)
     
-with open('scaler.pkl', 'rb') as f:
-    scaler_transformer = pickle.load(f)
 
-with open('solar_power_generation_model.pkl', 'rb') as f:
-    loaded_model = pickle.load(f)
+
 
 # Streamlit app
 st.title('Solar Power Generation Predictor')
