@@ -44,7 +44,7 @@ input_data[['wind_direction_yj', 'humidity_yj']] = yeo_johnson_transformer.trans
 scaled_features = ['distance_to_solar_noon', 'temperature', 'wind_speed', 'visibility',
        'average_wind_speed_period', 'average_pressure_period',
        'wind_direction_yj', 'humidity_yj', 'power_generated_yj']
-
+'''
 # Apply scaling
 input_data[scaled_features] = scaler_transformer.transform(input_data[scaled_features])
 
@@ -61,3 +61,5 @@ final_prediction = yeo_johnson_transformer.inverse_transform(inverse_scaled_pred
 if st.button("Show Result"):
     st.subheader("Predicted Power Generated(J) - 3 Hour Measurement")
     st.write(f"**{final_prediction[0][0]:.2f}**")
+
+'''
