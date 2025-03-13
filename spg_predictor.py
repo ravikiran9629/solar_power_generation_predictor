@@ -31,9 +31,9 @@ humidity = st.number_input('Humidity(%)')
 average_pressure_period = st.number_input('Average Pressure(inches of Hg) - 3 Hour Measurement')
     
 data = {
+    'sky_cover': [sky_cover],
     'distance_to_solar_noon': [distance_to_solar_noon],
     'temperature': [temperature],
-    'sky_cover': [sky_cover],
     'wind_direction': [wind_direction],
     'wind_speed': [wind_speed],
     'average_wind_speed_period': [average_wind_speed_period],
