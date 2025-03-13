@@ -41,8 +41,4 @@ input_data = pd.DataFrame(data,index=[0])
 input_data[['wind_direction_yj']] = yeo_johnson_transformer.transform(input_data[['wind_direction']])
 input_data[['humidity_yj']] = yeo_johnson_transformer.transform(input_data[['humidity']])
 
-# List of columns to apply scaler (excluding 'sky_cover')
-scaled_features = ['distance_to_solar_noon', 'temperature', 'wind_speed', 'visibility',
-       'average_wind_speed_period', 'average_pressure_period',
-       'wind_direction_yj', 'humidity_yj', 'power_generated_yj']
 
