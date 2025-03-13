@@ -21,7 +21,7 @@ sky_cover = st.selectbox('Sky Cover', [0, 1, 2, 3, 4])
 wind_direction = st.number_input('Wind Direction(°) - Daily Average')
 wind_speed = st.number_input('Wind Speed(m/s)')
 average_wind_speed_period = st.number_input('Average Wind Speed(m/s) - 3 Hour Measurement')
-Humidity = st.number_input('Humidity(%)')
+humidity = st.number_input('Humidity(%)')
 average_pressure_period = st.number_input('Average Pressure(inches of Hg) - 3 Hour Measurement')
     
 data = {
@@ -31,7 +31,7 @@ data = {
     'wind_direction': [wind_direction],
     'wind_speed': [wind_speed],
     'average_wind_speed_period': [average_wind_speed_period],
-    'humidity': [Humidity],
+    'humidity': [humidity],
     'average_pressure_period': [average_pressure_period],
 }
 
