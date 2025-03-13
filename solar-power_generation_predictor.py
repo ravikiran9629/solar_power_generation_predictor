@@ -31,7 +31,7 @@ data = {
     'wind_direction_yj': [wind_direction],
     'wind_speed': [wind_speed],
     'average_wind_speed_period': [average_wind_speed_period],
-    'Humidity_yj': [Humidity],
+    'humidity_yj': [Humidity],
     'average_pressure_period': [average_pressure_period],
 }
 
