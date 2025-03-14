@@ -8,9 +8,6 @@ with open('yj_wd.pkl', 'rb') as f:
 
 with open('yj_h.pkl', 'rb') as f:
     yj_h = pickle.load(f)
-
-with open('yj_pg.pkl', 'rb') as f:
-    yj_pg = pickle.load(f)
     
 with open('scaler.pkl', 'rb') as f:
     scaler_transformer = pickle.load(f)
@@ -60,10 +57,7 @@ input_data = input_data.drop(['wind_direction','humidity'],axis=1)
 # Predict 
 transformed_prediction = loaded_model.predict(input_data)  # Get transformed target prediction
 
-# Reverse Yeo-Johnson transformation
-final_prediction = yj_pg.inverse_transform(transformed_prediction.reshape(-1, 1))
-
 # Show result
 if st.button("Show Result"):
     st.subheader("Predicted Power Generated(J) - 3 Hour Measurement")
-    st.write(f"**{final_prediction[0][0]:.2f}**")
+    st.write(f"**{transformed_prediction[0][0]:.2f}**")
