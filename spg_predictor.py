@@ -60,4 +60,4 @@ transformed_prediction = loaded_model.predict(input_data)  # Get transformed tar
 # Show result
 if st.button("Show Result"):
     st.subheader("Predicted Power Generated(J) - 3 Hour Measurement")
-    st.write(f"**{transformed_prediction[0][0]:.2f}**")
+    st.write(f"**{transformed_prediction[0]:.2f}**")
