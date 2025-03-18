@@ -83,6 +83,9 @@ if submit_button:
     else:
         bar_color = '77DD77'
 
+    # Get the appropriate color for the prediction
+    bar_color = get_soft_color(transformed_prediction, min_power, max_power)
+
     # Create figure and axis
     fig, ax = plt.subplots(figsize=(7, 0.4))  # Wider for better appearance
 
