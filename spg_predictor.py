@@ -73,11 +73,16 @@ if submit_button:
     progress_value = min(max(progress_value, 0.0), 1.0)  # Ensure it's within [0,1]
     # Convert NumPy float to native Python float
     progress_value = float(progress_value)
+
+    # Create columns to format output
+    col1, col2, col3 = st.columns([1, 6, 1])
     
     # Show result
     st.subheader("Predicted Power Generated (J) - 3 Hour Measurement")
     st.markdown(f"<h2 style='color: red; font-size: 32px; font-weight: bold;'>{transformed_prediction[0]:.2f}</h2>", unsafe_allow_html=True)
     
-    # Progress bar representation
-    progress_bar = st.progress(progress_value)
+    # Display min, progress bar, and max values
+    col1.write(f"**{min_value} J**")  
+    col2.progress(progress_value)  
+    col3.write(f"**{max_value} J**")
 
