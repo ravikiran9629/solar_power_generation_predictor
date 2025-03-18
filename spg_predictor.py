@@ -71,6 +71,8 @@ if submit_button:
     # Normalize the predicted value to the range [0,1]
     progress_value = (transformed_prediction[0] - min_value) / (max_value - min_value)
     progress_value = min(max(progress_value, 0.0), 1.0)  # Ensure it's within [0,1]
+    # Convert NumPy float to native Python float
+    progress_value = float(progress_value)
     
     # Show result
     st.subheader("Predicted Power Generated (J) - 3 Hour Measurement")
