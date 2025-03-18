@@ -63,8 +63,13 @@ if submit_button:
     
     # Predict 
     transformed_prediction = loaded_model.predict(input_data)  # Get transformed target prediction
-    
+
+    progress_value = predicted_value / 37000  # Assuming max value is 25,000
+
     # Show result
     st.subheader("Predicted Power Generated (J) - 3 Hour Measurement")
     st.markdown(f"<h2 style='color: red; font-size: 32px; font-weight: bold;'>{transformed_prediction[0]:.2f}</h2>", unsafe_allow_html=True)
+
+    # Progress bar representation
+    progress_bar = st.progress(progress_value)
 
