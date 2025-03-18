@@ -64,7 +64,7 @@ if submit_button:
     # Predict 
     transformed_prediction = loaded_model.predict(input_data)  # Get transformed target prediction
 
-    progress_value = predicted_value / 37000  # Assuming max value is 25,000
+    progress_value = transformed_prediction  / 37000  # Assuming max value is 25,000
 
     # Show result
     st.subheader("Predicted Power Generated (J) - 3 Hour Measurement")
