@@ -68,7 +68,7 @@ if submit_button:
 
     # Show result
     st.subheader("Predicted Power Generated (J) - 3 Hour Measurement")
-    st.markdown(f"<h2 style='color: red; font-size: 28px; font-weight: bold;'>{transformed_prediction:.2f}</h2>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='color: blue; font-size: 28px; font-weight: bold;'>{transformed_prediction:.2f}</h2>", unsafe_allow_html=True)
 
     # vizualization of predicted value in comparision of min and max from dataset
     # Define min and max power values
