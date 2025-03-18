@@ -77,11 +77,11 @@ if submit_button:
 
     # Determine color based on predicted value
     if transformed_prediction < max_power * 0.33:
-        bar_color = 'red'
+        bar_color = 'FF6961'
     elif transformed_prediction < max_power * 0.66:
-        bar_color = 'yellow'
+        bar_color = 'FFD700'
     else:
-        bar_color = 'green'
+        bar_color = '77DD77'
 
     # Create figure and axis
     fig, ax = plt.subplots(figsize=(7, 0.4))  # Wider for better appearance
