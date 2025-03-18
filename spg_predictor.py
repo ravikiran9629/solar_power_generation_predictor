@@ -71,25 +71,36 @@ if submit_button:
     st.markdown(f"<h2 style='color: red; font-size: 32px; font-weight: bold;'>{transformed_prediction:.2f}</h2>", unsafe_allow_html=True)
 
     # vizualization of predicted value in comparision of min and max from dataset
-    # Define min and max power values 
+    # Define min and max power values
     min_power = 0  
     max_power = 37000  
 
+    # Determine color based on predicted value
+    if transformed_prediction < max_power * 0.33:
+        bar_color = 'red'
+    elif transformed_prediction < max_power * 0.66:
+        bar_color = 'yellow'
+    else:
+        bar_color = 'green'
+
     # Create figure and axis
-    fig, ax = plt.subplots(figsize=(6, 1.2))  
-    ax.barh([''], [transformed_prediction], color='green', height=0.4)
+    fig, ax = plt.subplots(figsize=(7, 1.5))  # Wider for better appearance
+
+    # Draw bar with rounded edges using a rectangle
+    ax.barh([''], [transformed_prediction], color=bar_color, height=0.4, edgecolor="black", linewidth=0.8)
+
+    # Set limits and styling
     ax.set_xlim(min_power, max_power)
-
-    # Add labels and styling
     ax.set_xticks(np.linspace(min_power, max_power, 6))
-    ax.set_xticklabels([f"{int(val):,}" for val in np.linspace(min_power, max_power, 6)])
+    ax.set_xticklabels([f"{int(val):,}" for val in np.linspace(min_power, max_power, 6)], fontsize=10)
     ax.set_yticks([])
-    ax.set_xlabel("Power Generated (J)")
+    ax.set_xlabel("Power Generated (J)", fontsize=11, fontweight='bold')
 
-    # Title with prediction value
-    plt.title(f"Predicted Power: {transformed_prediction:,.2f} J", fontsize=12, fontweight='bold', color='green')
+    # Remove borders for a modern look
+    for spine in ax.spines.values():
+       spine.set_visible(False)
 
-    # Save the figure
-    plt.tight_layout() 
+    # Display in Streamlit
     st.pyplot(fig)
+
 
