@@ -91,5 +91,5 @@ if submit_button:
 
     # Save the figure
     plt.tight_layout() 
-    plt.show()
+    st.pyplot(fig)
 
