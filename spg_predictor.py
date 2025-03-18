@@ -69,10 +69,9 @@ if submit_button:
     st.markdown(f"<h2 style='color: red; font-size: 32px; font-weight: bold;'>{transformed_prediction:.2f}</h2>", unsafe_allow_html=True)
 
     # vizualization of predicted value in comparision of min and max from dataset
-    # Define min and max power values
-    predicted_value = 
+    # Define min and max power values 
     min_power = 0  
-    max_power = 25000  
+    max_power = 37000  
 
     # Create figure and axis
     fig, ax = plt.subplots(figsize=(6, 1.2))  
