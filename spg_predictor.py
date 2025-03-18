@@ -68,7 +68,6 @@ if submit_button:
 
     # Show result
     st.subheader("Predicted Power Generated (J) - 3 Hour Measurement")
-    #st.markdown(f"<h2 style='color: blue; font-size: 28px; font-weight: bold;'>{transformed_prediction:.2f}</h2>", unsafe_allow_html=True)
 
     # vizualization of predicted value in comparision of min and max from dataset
     # Define min and max power values
@@ -79,7 +78,7 @@ if submit_button:
     if transformed_prediction < max_power * 0.33:
         bar_color = '#FF6961'  # red
     elif transformed_prediction < max_power * 0.66:
-        bar_color = '#FFEB99'  # yellow
+        bar_color = '#E8C872'  # yellow
     else:
         bar_color = '#77DD77'  # green
 
@@ -97,7 +96,7 @@ if submit_button:
     ax.set_xlabel("Power Generated (J)", fontsize=11, fontweight='bold')
 
     # Title with prediction value
-    plt.title(f"Predicted Power: {transformed_prediction:,.2f} J", fontsize=8, fontweight='bold', color=bar_color)
+    plt.title(f"Predicted Power: {transformed_prediction:,.2f} J", fontsize=10, fontweight='bold', color=bar_color)
     
     # Remove borders for a modern look
     for spine in ax.spines.values():
