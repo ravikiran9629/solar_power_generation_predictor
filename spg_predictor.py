@@ -18,46 +18,52 @@ with open('solar_power_generation_model.pkl', 'rb') as f:
 # Streamlit app
 st.title('Solar Power Generation Predictor')
 
-distance_to_solar_noon = st.number_input('Distance to Solar Noon(rad)')
-temperature = st.number_input('Temperature(°C) - Daily Average')
-sky_cover = st.selectbox('Sky Cover', [0, 1, 2, 3, 4])
-wind_direction = st.number_input('Wind Direction(°) - Daily Average')
-wind_speed = st.number_input('Wind Speed(m/s)')
-average_wind_speed_period = st.number_input('Average Wind Speed(m/s) - 3 Hour Measurement')
-humidity = st.number_input('Humidity(%)')
-average_pressure_period = st.number_input('Average Pressure(inches of Hg) - 3 Hour Measurement')
+# Create a form for user input
+with st.form("solar_power_form"):
+    distance_to_solar_noon = st.number_input('Distance to Solar Noon (rad)', min_value=0.00, max_value=1.5, format="%.4f")
+    temperature = st.number_input('Temperature (°C) - Daily Average', min_value=0.0, max_value=100.0, format="%.1f")
+    sky_cover = st.selectbox('Sky Cover', [0, 1, 2, 3, 4])
+    wind_direction = st.number_input('Wind Direction (°) - Daily Average', min_value=0, max_value=360)
+    wind_speed = st.number_input('Wind Speed (m/s)', min_value=0.0, max_value=60.0, format="%.2f")
+    average_wind_speed_period = st.number_input('Average Wind Speed (m/s) - 3 Hour Measurement', min_value=0.0, max_value=60.0, format="%.2f")
+    humidity = st.number_input('Humidity (%)', min_value=0, max_value=100)
+    average_pressure_period = st.number_input('Average Pressure (inches of Hg) - 3 Hour Measurement', min_value=0.0, max_value=40.0, format="%.2f")
+
+    # Submit button inside the form
+    submit_button = st.form_submit_button("Predict")
+
+# Only process the prediction if the form is submitted
+if submit_button:
+    data = {
+        'sky_cover': [sky_cover],
+        'distance_to_solar_noon': [distance_to_solar_noon],
+        'temperature': [temperature],
+        'wind_direction': [wind_direction],
+        'wind_speed': [wind_speed],
+        'average_wind_speed_period': [average_wind_speed_period],
+        'humidity': [humidity],
+        'average_pressure_period': [average_pressure_period],
+    }
     
-data = {
-    'sky_cover': [sky_cover],
-    'distance_to_solar_noon': [distance_to_solar_noon],
-    'temperature': [temperature],
-    'wind_direction': [wind_direction],
-    'wind_speed': [wind_speed],
-    'average_wind_speed_period': [average_wind_speed_period],
-    'humidity': [humidity],
-    'average_pressure_period': [average_pressure_period],
-}
-
-input_data = pd.DataFrame(data,index=[0])
-
-# Apply Yeo-Johnson transformation on 'wind_direction_yj', 'humidity_yj'
-input_data[['wind_direction_yj']] = yj_wd.transform(input_data[['wind_direction']])
-input_data[['humidity_yj']] = yj_h.transform(input_data[['humidity']])
-
-
-# List of columns to apply scaler (excluding 'sky_cover')
-scaled_features = ['distance_to_solar_noon', 'temperature', 'wind_speed',
-       'average_wind_speed_period', 'average_pressure_period',
-       'wind_direction_yj', 'humidity_yj']
-
-# Apply scaling
-input_data[scaled_features] = scaler_transformer.transform(input_data[scaled_features])
-
-input_data = input_data.drop(['wind_direction','humidity'],axis=1)
-# Predict 
-transformed_prediction = loaded_model.predict(input_data)  # Get transformed target prediction
-
-# Show result
-if st.button("Show Result"):
-    st.subheader("Predicted Power Generated(J) - 3 Hour Measurement")
+    input_data = pd.DataFrame(data, index=[0])
+    
+    # Apply Yeo-Johnson transformation on 'wind_direction_yj', 'humidity_yj'
+    input_data[['wind_direction_yj']] = yj_wd.transform(input_data[['wind_direction']])
+    input_data[['humidity_yj']] = yj_h.transform(input_data[['humidity']])
+    
+    # List of columns to apply scaler (excluding 'sky_cover')
+    scaled_features = ['distance_to_solar_noon', 'temperature', 'wind_speed',
+           'average_wind_speed_period', 'average_pressure_period',
+           'wind_direction_yj', 'humidity_yj']
+    
+    # Apply scaling
+    input_data[scaled_features] = scaler_transformer.transform(input_data[scaled_features])
+    
+    input_data = input_data.drop(['wind_direction', 'humidity'], axis=1)
+    
+    # Predict 
+    transformed_prediction = loaded_model.predict(input_data)  # Get transformed target prediction
+    
+    # Show result
+    st.subheader("Predicted Power Generated (J) - 3 Hour Measurement")
     st.write(f"**{transformed_prediction[0]:.2f}**")
