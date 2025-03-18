@@ -62,11 +62,33 @@ if submit_button:
     input_data = input_data.drop(['wind_direction', 'humidity'], axis=1)
     
     # Predict 
-    transformed_prediction = loaded_model.predict(input_data)  # Get transformed target prediction
+    transformed_prediction = loaded_model.predict(input_data)[0]  # Get target prediction
 
     # Show result
     st.subheader("Predicted Power Generated (J) - 3 Hour Measurement")
-    st.markdown(f"<h2 style='color: red; font-size: 32px; font-weight: bold;'>{transformed_prediction[0]:.2f}</h2>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='color: red; font-size: 32px; font-weight: bold;'>{transformed_prediction:.2f}</h2>", unsafe_allow_html=True)
 
-    
+    # vizualization of predicted value in comparision of min and max from dataset
+    # Define min and max power values
+    predicted_value = 
+    min_power = 0  
+    max_power = 25000  
+
+    # Create figure and axis
+    fig, ax = plt.subplots(figsize=(6, 1.2))  
+    ax.barh([''], [transformed_prediction], color='green', height=0.4)
+    ax.set_xlim(min_power, max_power)
+
+    # Add labels and styling
+    ax.set_xticks(np.linspace(min_power, max_power, 6))
+    ax.set_xticklabels([f"{int(val):,}" for val in np.linspace(min_power, max_power, 6)])
+    ax.set_yticks([])
+    ax.set_xlabel("Power Generated (J)")
+
+    # Title with prediction value
+    plt.title(f"Predicted Power: {transformed_prediction:,.2f} J", fontsize=12, fontweight='bold', color='green')
+
+    # Save the figure
+    plt.tight_layout() 
+    plt.show()
 
