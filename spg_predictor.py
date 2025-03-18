@@ -66,4 +66,5 @@ if submit_button:
     
     # Show result
     st.subheader("Predicted Power Generated (J) - 3 Hour Measurement")
-    st.write(f"**{transformed_prediction[0]:.2f}**")
+    st.markdown(f"<h2 style='color: red; font-size: 32px; font-weight: bold;'>{transformed_prediction[0]:.2f}</h2>", unsafe_allow_html=True)
+
