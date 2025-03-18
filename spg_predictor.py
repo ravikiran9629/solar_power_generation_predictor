@@ -87,7 +87,7 @@ if submit_button:
     fig, ax = plt.subplots(figsize=(7, 0.4))  # Wider for better appearance
 
     # Draw bar with rounded edges using a rectangle
-    ax.barh([''], [transformed_prediction], color=bar_color, height=0.25, edgecolor="black", linewidth=0.8)
+    ax.barh([''], [transformed_prediction], color=bar_color, height=0.1, edgecolor="black", linewidth=0.8)
 
     # Set limits and styling
     ax.set_xlim(min_power, max_power)
